@@ -28,10 +28,12 @@ def space_splitter(data):
 
 
 def dot_remover(word):
-    if dot_regex.match(word) is None:
+    if dot_regex.match(word) is not None:
         return word
-    else:
+    elif word[-1] == ".":
         return word[:-1], "."
+    else:
+        return word
 
 
 def geo_names(data):
