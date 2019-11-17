@@ -28,7 +28,7 @@ def space_splitter(data):
 
 
 def dot_remover(word):
-    if dot_regex.match(word) is not None:
+    if dot_regex.match(word) is None:
         return word
     else:
         return word[:-1], "."
