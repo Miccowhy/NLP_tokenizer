@@ -58,13 +58,13 @@ def en_dash_remover(word):
 def geo_names(data):
     for word in range(len(data)):
         try:
-            if f"{data[word]} {data[word+1]}" in geo_list:
+            if f"{data[word]} {data[word + 1]} {data[word + 2]}" in geo_list:
+                data[word] = f"{data[word]} {data[word + 1]} {data[word + 2]}"
+                data.pop(word + 2)
+                data.pop(word + 1)
+            elif f"{data[word]} {data[word+1]}" in geo_list:
                 data[word] = f"{data[word]} {data[word+1]}"
                 data.pop(word + 1)
-            elif f"{data[word]} {data[word+1]} {data[word+2]}" in geo_list:
-                data[word] = f"{data[word]} {data[word + 1]}"
-                data.pop(word + 1)
-                data.pop(word + 2)
         except IndexError:
             pass
     return data

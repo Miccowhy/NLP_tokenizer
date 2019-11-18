@@ -20,48 +20,24 @@ def parse_cli():
     return cli_parser.parse_args(), cli_parser
 
 
+def functionify(data, passed_function):
+    unnested_data = list()
+    for word in data:
+        checked_word = passed_function(word)
+        if isinstance(checked_word, tuple):
+            [unnested_data.append(subword) for subword in checked_word]
+        else:
+            unnested_data.append(checked_word)
+    return unnested_data
+
+
 def tokenize(data):
-    split = space_splitter(data)
-    print(f"Split: {split}")
+    processed_data = space_splitter(data)
 
-    undotted = list()
-    #for word in splitted:
-    for word in split:
-        checked = dot_remover(word)
-        if isinstance(checked, tuple):
-            [undotted.append(subword) for subword in checked]
-        else:
-            undotted.append(dot_remover(word))
-    #print(f"Undotted: {undotted}")
+    for function in (dot_remover, contraction_check, punctuation_remover, en_dash_remover):
+        processed_data = functionify(processed_data, function)
 
-    decontractioned = list()
-    for word in undotted:
-        checked = contraction_check(word)
-        if isinstance(checked, tuple):
-            [decontractioned.append(subword) for subword in checked]
-        else:
-            decontractioned.append(checked)
-    #print(f"Deco: {decontractioned}")
-
-    punctuation = list()
-    for word in decontractioned:
-        checked = punctuation_remover(word)
-        if isinstance(checked, tuple):
-            [punctuation.append(subword) for subword in checked]
-        else:
-            punctuation.append(checked)
-    #print(f"Punc: {punctuation}")
-
-    undashed = list()
-    for word in punctuation:
-        checked = en_dash_remover(word)
-        if isinstance(checked, tuple):
-            [undashed.append(subword) for subword in checked]
-        else:
-            undashed.append(checked)
-    #print(f"Undashed: {undashed}")
-
-    tokenized_data = geo_names(undashed)
+    tokenized_data = geo_names(processed_data)
 
     return tokenized_data
 
@@ -76,8 +52,7 @@ if __name__ == "__main__":
         with open(args.file, 'r') as input_file:
             data = input_file
     else:
-        #helper.print_help()
-        data = input()
+        helper.print_help()
 
     if data is not None:
         tokenized_data = tokenize(data)
