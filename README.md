@@ -17,7 +17,7 @@ optional arguments:
   **-o OUTPUT, --output OUTPUT** |
                         path to the output file
   
-## Used data
+## Dependencies
 Project uses data from https://github.com/datasets/world-cities
 
 ## Other
