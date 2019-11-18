@@ -9,14 +9,16 @@ def parse_cli():
         description="""Tokenizes provided data""",
     )
     cli_group = cli_parser.add_mutually_exclusive_group()
-    cli_parser.add_argument("-o", "--output",
-                            help="path to the output file")
 
     cli_group.add_argument("-i", "--interactive", action="store_true",
                            help="use program in interactive mode")
 
     cli_group.add_argument("-f", "--file",
                            help="path to the input file")
+
+    cli_parser.add_argument("-o", "--output",
+                            help="path to the output file")
+
     return cli_parser.parse_args(), cli_parser
 
 

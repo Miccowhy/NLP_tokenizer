@@ -21,7 +21,8 @@ en_dash_regex = re.compile("(\d+|"
                             "((January|February|March|April|May|June|July|August|September|October|November|December)"
                            "|\d+)")
 
-geo_list = pandas.read_csv("world-cities.csv")['name'].values.tolist()
+world_cities = "https://raw.githubusercontent.com/datasets/world-cities/master/data/world-cities.csv"
+geo_list = pandas.read_csv(world_cities)['name'].values.tolist()
 
 
 def space_splitter(data):
