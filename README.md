@@ -6,8 +6,6 @@ Tokenizes and splits provided data
 ## Usage
 Tokenizer **[-h] [-t] [-s] [-i | -f FILE] [-o OUTPUT]**
 
-Tokenizes provided data
-
 optional arguments:
 
   **-h**, **--help** |           show this help message and exit
