@@ -1,25 +1,5 @@
-import re
+from regex import dot_regex, punctuation_regex, contraction_regex, en_dash_regex
 import pandas
-
-dot_regex = re.compile("[a-z]{2,4}\.|"
-                       "[A-Z][a-z]{0,3}\.|"
-                       "([A-Za-z]\.){2,}")
-
-punctuation_regex = re.compile("\w+([\-,\[\]:;\"?!]+|\.\.\.)$")
-
-contraction_regex = re.compile("\w+("
-                               "'ll|"
-                               "n't|"
-                               "'re|"
-                               "'ve|"
-                               "'s|"
-                               "'d)$")
-
-en_dash_regex = re.compile("(\d+|"
-                           "(January|February|March|April|May|June|July|August|September|October|November|December))"
-                           "-"
-                            "((January|February|March|April|May|June|July|August|September|October|November|December)"
-                           "|\d+)")
 
 world_cities = "https://raw.githubusercontent.com/datasets/world-cities/master/data/world-cities.csv"
 geo_list = pandas.read_csv(world_cities)['name'].values.tolist()
